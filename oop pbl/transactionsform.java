@@ -9,19 +9,19 @@ package reccommendersystem;
  *
  * @author chandrika
  */
-import java.sql.PreparedStatement;
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import java.sql.ResultSet;
-import javax.swing.JPasswordField;
-public class Registration extends javax.swing.JFrame {
+import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
+public class Transactions extends javax.swing.JFrame {
 
     /**
-     * Creates new form Registration
+     * Creates new form Transactions
      */
-    public Registration() {
+    public Transactions() {
         initComponents();
     }
 
@@ -36,216 +36,130 @@ public class Registration extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 255, 255));
-        jLabel1.setText("Registration");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 59, -1, -1));
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setText("Transactions");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 250, 70));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel2.setText("FirstName");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 189, 120, -1));
+        jLabel2.setForeground(new java.awt.Color(153, 204, 255));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(204, 255, 204));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 102, 102));
+        jButton3.setText("Reset");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 660, 140, -1));
+
+        jTable1.setBackground(new java.awt.Color(153, 153, 153));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 210, 1120, -1));
+
+        jButton5.setBackground(new java.awt.Color(204, 255, 204));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 102, 102));
+        jButton5.setText("Show transactions");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 660, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel3.setText("LastName");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 261, -1, -1));
+        jLabel3.setForeground(new java.awt.Color(204, 0, 204));
+        jLabel3.setText("Enter account no");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 200, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel4.setText("UserName");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 333, 128, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel5.setText("Password");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 414, 114, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel6.setText("Age");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(676, 200, 61, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel7.setText("Gender");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(676, 272, -1, -1));
-
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(0, 204, 204));
-        jCheckBox1.setText("Male");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(794, 276, 85, -1));
-
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(0, 204, 204));
-        jCheckBox2.setText("Female");
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(924, 276, 100, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 255, 204));
-        jLabel8.setText("DOB");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(676, 345, 60, -1));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setBackground(new java.awt.Color(204, 255, 204));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 102, 102));
+        jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 199, 300, -1));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 271, 300, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 343, 300, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(794, 210, 215, -1));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(794, 355, 215, -1));
-
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 153, 255));
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 555, -1, -1));
-
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 153, 255));
-        jButton2.setText("Reset");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 560, -1, -1));
-
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 153, 255));
-        jButton3.setText("Already have an account? Sign in");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 650, -1, -1));
-
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 290, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\chandrika\\OneDrive\\Documents\\NetBeansProjects\\ReccommenderSystem\\src\\PBLimages\\pblimage5.jpg")); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 760));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 200, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+String databaseURL = "jdbc:mysql://localhost:3306/recommendersystem";
+String usernameDB = "root";
+String passwordDB = "";
+String accNo = jTextField1.getText();
+
+try {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection con = DriverManager.getConnection(databaseURL, usernameDB, passwordDB);
+
+    // SQL query to select transactions for the given account number
+    String sq = "SELECT * FROM trans WHERE acc = ?";
+    PreparedStatement st = con.prepareStatement(sq);
+    st.setString(1, accNo);
+    ResultSet rs = st.executeQuery();
+    ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    int cols = rsmd.getColumnCount();
+    String[] colName = new String[cols];
+
+    for (int i = 1; i <= cols; i++) {
+        colName[i - 1] = rsmd.getColumnName(i);
+    }
+
+    model.setColumnIdentifiers(colName);
+
+    // Clear existing rows in the table model
+    model.setRowCount(0);
+
+    while (rs.next()) {
+        String sNo = String.valueOf(rs.getInt("s_no"));
+        String earnedPoints = rs.getString("earnedpts");
+        String burnedPoints = rs.getString("burnedpts");
+        String totalPoints = rs.getString("totalpts");
+        String account = rs.getString("acc");
+        String date = rs.getString("date");
+        String[] row = {sNo, earnedPoints, burnedPoints, totalPoints, account, date};
+        model.addRow(row);
+    }
+
+    con.close();
+} catch (ClassNotFoundException | SQLException e) {
+    System.out.println("Error: " + e.getMessage());
+}
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- String firstName = jTextField1.getText();
-        String lastName = jTextField2.getText();
-        String username = jTextField3.getText();
-        char[] passwordChars = jPasswordField1.getPassword();
-        String password = new String(passwordChars);
-        String age = jTextField5.getText();
-        String dob = jTextField6.getText();
-            String databaseURL = "jdbc:mysql://localhost:3306/recommendersystem";
-            String usernameDB = "root";
-            String passwordDB = "";
-        try 
-        {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(databaseURL, usernameDB, passwordDB);
-            // Check if the user already exists
-            String sq = "SELECT COUNT(*) FROM userlogins WHERE username = ?";
-            PreparedStatement st = con.prepareStatement(sq);
-            st.setString(1, username);
-            ResultSet rs = st.executeQuery();
-            rs.next(); 
-            int count = rs.getInt(1);
-            if (count > 0)
-            {
-                JOptionPane.showMessageDialog(this, "A user account with the provided username already exists. Please choose another username or log in with the existing one.","Duplicate Entry!", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                UserLogin obj=new UserLogin();
-                obj.setLocationRelativeTo(null);
-                obj.setVisible(true);
-                return; // Stop further execution
-            }
-            // Define SQL insert statement
-            String iq = "INSERT INTO userlogins (firstname, lastname, username, password, age, dob) VALUES (?, ?, ?, ?, ?, ?)";   // iq=Insert Query
-            PreparedStatement is = con.prepareStatement(iq);                                                                         // is=Insert Statement
-            // Set parameters
-            is.setString(1, firstName);
-            is.setString(2, lastName);
-            is.setString(3, username);
-            is.setString(4, password);
-            is.setString(5, age);
-            is.setString(6, dob);
-            // Execute the insert statement
-            int temp = is.executeUpdate();
-            if (temp == 1)
-            {
-                JOptionPane.showMessageDialog(this, "Your Registration has been Successful.", "Thanks For Registering!", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                UserLogin obj=new UserLogin();
-                obj.setLocationRelativeTo(null);
-                obj.setVisible(true);
-            }
-            // Close resources
-            is.close();
-            st.close();
-            con.close();
-        } 
-        catch (ClassNotFoundException | SQLException e) 
-        {
-            System.out.println("Error: " + e.getMessage());
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         dispose();    
-        UserLogin obj=new UserLogin();
-           obj.setLocationRelativeTo(null);
-           obj.setVisible(true);          // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+        UserDashboard obj=new UserDashboard();
+        obj.setLocationRelativeTo(null);
+        obj.setVisible(true);         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,44 +178,33 @@ public class Registration extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registration().setVisible(true);
+                new Transactions().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
